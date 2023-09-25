@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { inserir } from '../repository/chamadaRepository.js'
+import { consulta, inserir } from '../repository/chamadaRepository.js'
 
 let endpoint = Router();
 
@@ -21,5 +21,13 @@ endpoint.post('/inserir', async (req, resp) => {
 
 
 })
+
+
+endpoint.get('/consulta', async (req, resp) => {
+    let dados = await consulta()
+    resp.send(dados)
+})
+
+
 
 export default endpoint;
