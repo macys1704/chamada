@@ -17,3 +17,15 @@ export async function consulta() {
     resposta[0]
     return resposta
 }
+
+
+export async function deletar(id) {
+    try {
+        const comando = 'DELETE FROM tb_chamada WHERE id_chamada = ?';
+
+        const [resposta] = await conexao.query(comando, [id]);
+
+    } catch (err) {
+        throw new Error(err.message);
+    }
+}
