@@ -1,4 +1,4 @@
-import mysql from 'mysql2/promise'
+import mysql from 'mysql2/promise';
 
 const conexao = await mysql.createConnection({
     host: process.env.HOST,
@@ -7,6 +7,5 @@ const conexao = await mysql.createConnection({
     password: process.env.PWD
 });
 
-
-console.log('BD connect')
+console.log('BD conectado')
 export default conexao;
