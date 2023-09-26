@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { consulta, deletar, inserir } from '../repository/chamadaRepository.js'
+import { alterarchamada, consulta, deletar, inserir } from '../repository/chamadaRepository.js'
 
 let endpoint = Router();
 
@@ -9,15 +9,8 @@ endpoint.post('/inserir', async (req, res) => {
 
         const resultado = await inserir(chamada);
 
-        if (resultado.affectedRows > 0) {
-            res.status(201).json({ message: 'Chamada inserida com sucesso' });
-
-        } else {
-            res.status(400).json({ message: 'Erro ao inserir chamada' });
-        }
-
     } catch (err) {
-        res.status(500).json({ erro: err.message });
+        res.status(500).send({ erro: err.message });
     }
 });
 
@@ -35,6 +28,22 @@ endpoint.delete('/deletar/:id', async (req, resp) => {
 
     } catch (err) {
         resp.send({
+            erro: err.message
+        })
+    }
+})
+
+endpoint.put('/alterar/:id', async (req, resp) => {
+    try {
+
+        const id = req.params.id
+        const chamada = req.body
+
+
+        const resposta = await alterarchamada(id, chamada)
+
+    } catch (err) {
+        resp.status(202).send({
             erro: err.message
         })
     }
