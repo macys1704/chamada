@@ -3,14 +3,15 @@ import { alterarchamada, consulta, deletar, inserir } from '../repository/chamad
 
 let endpoint = Router();
 
-endpoint.post('/inserir', async (req, res) => {
+endpoint.post('/inserir', async (req, resp) => {
     try {
-        const chamada = req.body;
+        let inscricao = req.body;
 
-        const resultado = await inserir(chamada);
+        let resultado = await inserir(inscricao);
+        resp.send(resultado)
 
     } catch (err) {
-        res.status(500).send({ erro: err.message });
+        resp.status(500).send({ erro: err.message });
     }
 });
 
@@ -36,11 +37,12 @@ endpoint.delete('/deletar/:id', async (req, resp) => {
 endpoint.put('/alterar/:id', async (req, resp) => {
     try {
 
-        const id = req.params.id
-        const chamada = req.body
+        let id = req.params.id
+        let inscricao = req.body
 
 
-        const resposta = await alterarchamada(id, chamada)
+        let resposta = await alterarchamada(id, inscricao)
+        resp.send()
 
     } catch (err) {
         resp.status(202).send({
