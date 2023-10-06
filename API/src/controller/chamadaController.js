@@ -7,6 +7,23 @@ endpoint.post('/inserir', async (req, resp) => {
     try {
         let inscricao = req.body;
 
+        if (!inscricao.nome)
+        throw new Error('⚠ Nome obrigatório');
+
+        if (!inscricao.marca)
+        throw new Error('⚠ Marca obrigatório');
+
+        if (!inscricao.categoria)
+        throw new Error('⚠ Categoria obrigatório');
+
+        if (inscricao.valor == 0 || inscricao.valor < 0)
+        throw new Error('⚠ Valor deve ser maior que 0');
+
+
+        if (!inscricao.modelo)
+        throw new Error('⚠ Modelo obrigatório');
+
+
         let resultado = await inserir(inscricao);
         resp.send(resultado)
 
@@ -40,12 +57,27 @@ endpoint.put('/alterar/:id', async (req, resp) => {
         let id = req.params.id
         let inscricao = req.body
 
+        if (!inscricao.nome)
+        throw new Error('⚠ Nome obrigatório');
+
+        if (!inscricao.marca)
+        throw new Error('⚠ Marca obrigatório');
+
+        if (!inscricao.categoria)
+        throw new Error('⚠ Categoria obrigatório');
+
+        if (inscricao.valor == 0 || inscricao.valor < 0)
+        throw new Error('⚠ Valor deve ser maior que 0');
+
+
+        if (!inscricao.modelo)
+        throw new Error('⚠ Modelo obrigatório');
 
         let resposta = await alterarchamada(id, inscricao)
         resp.send()
 
     } catch (err) {
-        resp.status(202).send({
+        resp.status(500).send({
             erro: err.message
         })
     }
